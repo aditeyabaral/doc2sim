@@ -16,10 +16,18 @@ def readPDF(document):
     return content
 
 
+def readOther(document):
+    with open(document) as f:
+        content = f.read().lower().strip()
+    return content
+
+
 def getText(document):
     p = Path(document)
     extension = p.suffix
     if extension == ".docx":
         return readDocx(document)
-    else:
+    elif extension == ".pdf":
         return readPDF(document)
+    else:
+        return readOther(document)

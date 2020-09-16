@@ -15,16 +15,19 @@ train_text = [TaggedDocument(words=word_tokenize(
     doc), tags=[str(i)]) for i, doc in enumerate(documents)]
 
 
-print("Creating Doc2Vec model...")
 model = Doc2Vec(vector_size=500, window=2, epochs=20, min_count=1)
 model.build_vocab(train_text)
 model.train(train_text, total_examples=model.corpus_count, epochs=50)
-print("Training completed...")
 
-print("Processing Documents for Comparison...")
 test_text = list(map(word_tokenize, documents))
 
-print("Extracting Document Vectors...")
 vecs = list(map(model.infer_vector, test_text))
 
-print(f"\nSimilarity = {cosine_similarity(*vecs)}")
+total_files = len(filenames)
+similarity_matrix = np.zeros((total_files, total_files))
+
+for i in range(total_files):
+    for j in range(total_files):
+        similarity_matrix[i, j] = cosine_similarity(vecs[i], vecs[j])
+
+print(f"\nSimilarity = \n{similarity_matrix}")
