@@ -13,3 +13,5 @@ python3 d2v.py file1 file2
 *   gensim
 *   nltk
 *   numpy
+*   python-docx
+*   PyPDF2
