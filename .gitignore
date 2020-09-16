@@ -1,3 +1,5 @@
 .vscode/
+__pycache__/
 *.docx
 *.pdf
+w2v.py

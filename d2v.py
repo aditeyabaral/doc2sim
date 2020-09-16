@@ -21,10 +21,10 @@ model.build_vocab(train_text)
 model.train(train_text, total_examples=model.corpus_count, epochs=50)
 print("Training completed...")
 
-print("Obtaining sentences for documents...")
+print("Processing Documents for Comparison...")
 test_text = list(map(word_tokenize, documents))
 
-print("Obtaing Document Vectors...")
+print("Extracting Document Vectors...")
 vecs = list(map(model.infer_vector, test_text))
 
 print(f"\nSimilarity = {cosine_similarity(*vecs)}")
