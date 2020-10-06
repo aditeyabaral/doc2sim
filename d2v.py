@@ -41,7 +41,7 @@ def check_similarity(filenames):
 
 filenames = sys.argv[1:]
 if '--gui' in filenames:
-    app = gui.create_app(sim_callback=check_similarity, here=Path(__file__))
+    app = gui.create_app(sim_callback=check_similarity, here=Path(__file__).resolve())
     app.run(port=3000, debug=('--debug' in filenames))
 else:
     similarity_matrix = check_similarity(filenames)
