@@ -12,5 +12,5 @@ def browse(from_path):
                 'uuid': str(uuid.uuid4()),
             }
         )
-    result.sort(key=lambda i: -1*i.get('is_folder', 0))
+    result.sort(key=lambda i: ''.join((str(-1*i.get('is_folder', 0)), i.get('name', '').lower())))
     return result
