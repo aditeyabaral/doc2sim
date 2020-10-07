@@ -3,3 +3,4 @@ python-docx==0.8.10
 gensim==3.8.3
 nltk==3.5
 PyPDF2==1.26.0
+Flask==1.1.2
