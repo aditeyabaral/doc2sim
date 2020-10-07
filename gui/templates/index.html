@@ -10,10 +10,27 @@
         <!-- Fontawesome CSS -->
         <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
 
-        <title>doc2sim</title>
+        <title>Doc2Sim</title>
     </head>
     <body>
         <main class="container">
+            <nav class="navbar navbar-dark bg-dark mb-3">
+                <a class="navbar-brand" href="https://github.com/aditeyabaral/doc2sim" target="_blank">
+                    <i class="fab fa-github"></i>
+                    Doc2Sim
+                </a>
+                <span class="navbar-brand">Utility to find similarity in content between documents using Doc2Vec</span>
+            </nav>
+{% if messages|length > 0 %}
+            <div class="card border-danger m-2">
+                <div class="card-header bg-danger text-white">Error</div>
+                <div class="card-body">
+    {% for m in messages %}
+                    <p>{{ m|safe }}</p>
+    {% endfor %}
+                </div>
+            </div>
+{% endif %}
 {% if similarity_matrix|length > 0 %}
     {% set c, r = similarity_matrix.shape %}
             <div class="card my-3">
@@ -68,8 +85,33 @@
                 </button>
             </form>
         </main>
+        <div id="file-dialog" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <small class="modal-title"><span id="dialog-title">path</span> <a href="#" id="btfolderup" class="btn btn-primary btn-sm"><i class="fas fa-level-up-alt"></i></a></small>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-borderless">
+                            <tbody id="table-path">
+                                <tr>
+                                    <td><span class="text-warning"><i class="fas fa-folder"></i></span> <a href="#">Folder</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">File</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
         <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('include_js') }}"></script>
         <script src="{{ url_for('static', filename='js/doc2sim.js') }}"></script>
     </body>
 </html>
