@@ -5,7 +5,7 @@
 {% endblock scripts %}
 
 {% block content %}
-            <h3>Add files to compare</h3>
+            <!--<h3>Add your files below</h3> -->
             <div class="custom-file">
                 <input type="file" id="filename" class="custom-file-input">
                 <label id="lblfilename" for="filename" class="custom-file-label">Choose file</label>
@@ -16,11 +16,11 @@
             <p>
                 <button id="btcheck" type="button" class="btn btn-primary mt-3">
                     <i class="fas fa-equals"></i>
-                    Check
+                    COMPARE
                 </button>
             </p>
             <div class="card mt-3" id="resultPanel">
-                <div class="card-header">Results - Similarity Matrix</div>
+                <div class="card-header">Similarity Matrix</div>
                 <div class="card-body">
                     <table class="table">
                         <tbody id="resultTable">
@@ -39,7 +39,7 @@
                                 <div class="spinner-border text-info m-3" role="status">
                                     <span class="sr-only">Sending...</span>
                                 </div>
-                                Wait! Sending files...
+                                Sending files...
                             </div>
                         </div>
                     </div>

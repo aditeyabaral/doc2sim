@@ -13,15 +13,11 @@ from flask import (
 
 from .utils import *
 
-
-def to_fixed(number, precision):
-    return "{:.{}f}".format(number, precision)
-    s = str(number)
-    i = s.find('.')
-    return ''.join((s[:i+1], s[i+1:i+precision+1].ljust(precision, '0')))
+def getPercent(number):
+    number*= 100
+    return "{:.3f}%".format(number)
 
 
-#def create_app():
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = str((Path(__file__).parent/Path('.uploaded')).resolve())
 
@@ -36,33 +32,28 @@ def include_js():
     response.headers['Content-Type'] = 'text/javascript'
     return response
 
+
 @app.route('/upload', methods=['POST'])
 def upload():
     upload_folder = Path(app.config['UPLOAD_FOLDER'])
     if not upload_folder.exists():
         upload_folder.mkdir(parents=True)
     uploaded_files = request.files.getlist('files_up')
-    local_filenames = []
     filenames = []
     sim_matrix = []
     for f in uploaded_files:
         if f.filename:
-            uuid_filename = upload_folder/Path(str(uuid.uuid4()))
-            local_filenames.append(str(uuid_filename))
             filenames.append(f.filename)
-            f.save(str(uuid_filename))
+            f.save(str(f.filename))
     if filenames:
-        matrix = check_similarity(local_filenames)
-        # print('[DEBUG]', matrix)
+        matrix = check_similarity(filenames)
         for i in range(matrix.shape[0]):
-            sim_matrix.append([filenames[i]] + list(map(lambda x: to_fixed(x, 3), matrix[i])))
+            sim_matrix.append([filenames[i]] + list(map(getPercent, matrix[i])))
         sim_matrix.insert(0, [''] + filenames)
-        # Delete uploaded files
-        for f in local_filenames:
+
+        for f in filenames:
             Path(f).unlink(missing_ok=True)
     return {
         'sim_matrix': sim_matrix,
         'filenames': filenames
     }
-    
-    #return app
