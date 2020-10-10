@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block scripts %}
+        <script src="{{ url_for('static', filename='js/doc2sim.js') }}"></script>
+{% endblock scripts %}
+
+{% block content %}
+            <h3>Add files to compare</h3>
+            <div class="custom-file">
+                <input type="file" id="filename" class="custom-file-input">
+                <label id="lblfilename" for="filename" class="custom-file-label">Choose file</label>
+            </div>
+            <div class="card mt-3">
+                <div id="file-list" class="card-body"></div>
+            </div>
+            <p>
+                <button id="btcheck" type="button" class="btn btn-primary mt-3">
+                    <i class="fas fa-equals"></i>
+                    Check
+                </button>
+            </p>
+            <div class="card mt-3" id="resultPanel">
+                <div class="card-header">Results - Similarity Matrix</div>
+                <div class="card-body">
+                    <table class="table">
+                        <tbody id="resultTable">
+                        </tbody>
+                    </table>
+            </div>
+            <!-- Wait dialog -->
+            <div id="waitDialog" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="dialogTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="dialogTitle">Sending...</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex align-items-center">
+                                <div class="spinner-border text-info m-3" role="status">
+                                    <span class="sr-only">Sending...</span>
+                                </div>
+                                Wait! Sending files...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Error dialog -->
+            <div id="errorDialog" class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="errorDialogTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-danger text-white">
+                            <h5 class="modal-title" id="errorDialogTitle">Oops!</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>                            
+                        </div>
+                        <div class="modal-body">
+                            <p id="errorDialogText"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+{% endblock content %}

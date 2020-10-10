@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+        <!-- Fontawesome CSS -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.min.css') }}">
+
+        <title>Doc2Sim</title>
+    </head>
+    <body>
+        <main class="container">
+            <nav class="navbar navbar-dark bg-dark mb-3">
+                <a class="navbar-brand" href="https://github.com/aditeyabaral/doc2sim" target="_blank">
+                    <i class="fab fa-github"></i>
+                    Doc2Sim
+                </a>
+                <span class="navbar-brand">Utility to find similarity in content between documents using Embeddings</span>
+            </nav>
+{% if messages|length > 0 %}
+            <div class="card border-danger m-2">
+                <div class="card-header bg-danger text-white">Error</div>
+                <div class="card-body">
+    {% for m in messages %}
+                    <p>{{ m|safe }}</p>
+    {% endfor %}
+                </div>
+            </div>
+{% endif %}
+{% block content %}
+{% endblock content %}
+        </main>
+        <script src="{{ url_for('static', filename='js/jquery-3.5.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ url_for('include_js') }}"></script>
+{% block scripts %}
+{% endblock scripts %}
+    </body>
+</html>

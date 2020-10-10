@@ -1,4 +1,5 @@
 .vscode/
+.uploaded/
 __pycache__/
 *.py[cod]
 *.docx
