@@ -35,7 +35,7 @@ def getText(document):
         return readOther(document)
 
 
- def cosine_similarity(A, B):
+def cosine_similarity(A, B):
     return np.dot(A, B)/(np.linalg.norm(A)*np.linalg.norm(B))
 
 
