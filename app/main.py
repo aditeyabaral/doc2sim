@@ -11,10 +11,11 @@ from flask import (
     make_response,
 )
 
-import utils
+from .utils import *
 
 
 def to_fixed(number, precision):
+    return "{:.{}f}".format(number, precision)
     s = str(number)
     i = s.find('.')
     return ''.join((s[:i+1], s[i+1:i+precision+1].ljust(precision, '0')))
@@ -51,7 +52,7 @@ def upload():
             filenames.append(f.filename)
             f.save(str(uuid_filename))
     if filenames:
-        matrix = utils.check_similarity(local_filenames)
+        matrix = check_similarity(local_filenames)
         # print('[DEBUG]', matrix)
         for i in range(matrix.shape[0]):
             sim_matrix.append([filenames[i]] + list(map(lambda x: to_fixed(x, 3), matrix[i])))
