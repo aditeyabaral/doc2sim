@@ -11,7 +11,7 @@ from flask import (
     make_response,
 )
 
-import .utils
+import utils
 
 
 def to_fixed(number, precision):
