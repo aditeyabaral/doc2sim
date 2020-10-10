@@ -30,5 +30,5 @@ def check_similarity(filenames):
 
     for i in range(total_files):
         for j in range(total_files):
-            similarity_matrix[i, j] = cosine_similarity(vecs[i], vecs[j])
+            similarity_matrix[i, j] = "{:.3f}".format(cosine_similarity(vecs[i], vecs[j]))
     return similarity_matrix

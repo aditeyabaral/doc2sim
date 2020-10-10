@@ -2,7 +2,7 @@ import sys
 
 from pathlib import Path
 
-import doc2sim
+import lib
 
 filenames = sys.argv[1:]
 
