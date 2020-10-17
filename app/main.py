@@ -13,6 +13,10 @@ from flask import (
 
 from .utils import *
 
+import os
+import nltk
+nltk.download('punkt')
+
 def getPercent(number):
     number*= 100
     return "{:.3f}%".format(number)
@@ -52,7 +56,11 @@ def upload():
         sim_matrix.insert(0, [''] + filenames)
 
         for f in filenames:
-            Path(f).unlink(missing_ok=True)
+            try:
+                Path(f).unlink(missing_ok=True)
+            except TypeError:
+                os.remove(f)
+
     return {
         'sim_matrix': sim_matrix,
         'filenames': filenames
